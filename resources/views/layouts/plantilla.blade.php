@@ -53,6 +53,39 @@
               <a class="nav-link" href="#">Circulares</a>
             </li>
 
+            @guest   <!-- el usuario NO esta autenticado? -->
+    @section('content2')
+        <li class="nav-item">
+        <a class="nav-link" href="{{ route('login') }}">Login</a>
+        </li>
+    @stop
+  @else
+    @section('content2')
+      <li class="nav-item dropdown">
+        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+          {{ Auth::user()->name }} <span class="caret"></span>
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{ route('logout') }}"
+          onclick="event.preventDefault();
+          document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+          </a>
+
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf <!-- Este token se utiliza para verificar que el usuario autenticado es el que realmente realiza las solicitudes a la aplicación.-->
+          </form>
+        </div>
+      </li>
+
+      @if(Auth::user()->rol == 1)
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('register')}}">Registrar</a>
+        </li>
+      @endif
+    @stop
+  @endguest
             @yield('content2')
           </ul>
           
@@ -67,7 +100,7 @@
           <ul class="navbar-nav mr-auto">
 
             <li class="nav-item">
-              <a class="nav-link" href="#">Planeación</a>
+              <a class="nav-link" href="/Planificacion">Planeación</a>
             </li>
 
             <li class="nav-item">
@@ -157,6 +190,11 @@
       .col-11 {width: 91.66%;}
       .col-12 {width: 100%;}
     
+    .contenedor {
+        margin: 5px;
+        border: 3px solid #ccc;
+        text-align: center;
+      }
 
     .btn {
       background-color: DodgerBlue;

@@ -1,39 +1,5 @@
 @extends('layouts.plantilla')
 
-  @guest   <!-- el usuario NO esta autenticado? -->
-    @section('content2')
-        <li class="nav-item">
-        <a class="nav-link" href="{{ route('login') }}">Login</a>
-        </li>
-    @stop
-  @else
-    @section('content2')
-      <li class="nav-item dropdown">
-        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-          {{ Auth::user()->name }} <span class="caret"></span>
-        </a>
-
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{{ route('logout') }}"
-          onclick="event.preventDefault();
-          document.getElementById('logout-form').submit();">
-            {{ __('Logout') }}
-          </a>
-
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf <!-- Este token se utiliza para verificar que el usuario autenticado es el que realmente realiza las solicitudes a la aplicación.-->
-          </form>
-        </div>
-      </li>
-
-      @if(Auth::user()->rol == 1)
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('register')}}">Registrar</a>
-        </li>
-      @endif
-    @stop
-  @endguest
-<!-- //////////////////////////////////////////////////////////////////////// -->
 @section('content')
 
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
