@@ -23,6 +23,9 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth', 'isUsuario']], function() {
     Route::resource('/Planificacion','PlanificacionController');
+    Route::resource('/Generalidades', 'generalidadesController');
+    Route::resource('/Identificacion', 'identificacionController');
+    Route::resource('/Acciones', 'accionesController');
 });
 
 //Route::get('/home', 'HomeController@index')->name('home');
