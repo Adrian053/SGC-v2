@@ -1,65 +1,76 @@
 @extends('layouts.plantilla')
 
 @section('content')
-	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-md-8">
+			<div class="col-md-11">
 				<div class="card">
 				<div class="card-header">Acciones</div>
-					<form method="POST" action="/Generalidades">
+					<form method="POST" action="/Acciones">
 						@csrf
-						<div class="row">
-							<div class="col-s-6">
-								<label for="No_Obj" class="col-md-4 col-form-label text-md-right">Objetivo de calidad No.</label>
-								<div class="col-md-6">
-									<select class="form-control" id="No_Obj" name="No_Obj" type="integer">
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-s-3">
-								<label for="year" class="col-form-label text-md-right">Año</label>
-								<div class="col-md-4">
-									<input type="number" step="1" id="year" name="year" value=<?php echo date('Y'); ?>>
-								</div>
-							</div>
+						<div class="col-ss-0">
+							<label>No.</label>
 						</div>
-						<div class="row">
-							<div class="col-s-7">
-								<label for="F_aprovacion" class="col-form-label text-md-right">Fecha de Aprobacion</label>
-								<div class="col-md-4">
-									<input type="date" id="F_aprovacion" name="F_aprovacion" value="">
-								</div>
-							</div>
+						<div class="col-ss-1">
+							<label>Descripciond de la actividad</label>
+							<textarea style="width: 100%;"></textarea>
 						</div>
-						<div class="row">
-							<div class="col-s-7">
-								<label for="F_apertura" class="col-form-label text-md-right">Fecha de Apertura</label>
-								<div class="col-md-4">
-									<input type="date" id="F_apertura" name="F_apertura" value="">
-								</div>
-							</div>
+						<div class="col-s-1">
+							<label>Responsable</label>
+							<textarea style="width: 100%;"></textarea>
 						</div>
-						<div class="row">
-							<div class="col-s-7">
-								<label for="F_cumplimiento" class="col-form-label text-md-right">Fecha prevista de cumplimiento</label>
-								<div class="col-md-4">
-									<input type="date" id="F_cumplimiento" name="F_cumplimiento" value="">
-								</div>
-							</div>
+						<div class="col-ss-2">
+							<label>Recursos requeridos</label>
+							<textarea></textarea>
 						</div>
-						<div class="row">
-							<div class="col-s-12" style="text-align: center">
-								<input type="submit" value="Guardar">
-							</div>
+						<div class="col-ss-3">
+							<label>Fecha de inicio</label>
+							<input type="date" name="F_inicio" value="">
+						</div>
+						<div class="col-s-1">
+							<label>Ponderación</label>
+							<select class="form-control" id="pond" name="pond" type="integer">
+							</select>
+						</div>
+						<div class="col-s-1">
+							<label>Estado</label>
+							<select class="form-control" id="estado" name="estado">
+								<option value="abierto">Abierto</option>
+								<option value="proceso">Proceso</option>
+								<option value="cerrado">Cerrado</option>
+							</select>
+						</div>
+						<div class="col-ss-3">
+							<label>Fecha de finalización</label>
+							<input type="date" name="F_finalizacion" value="">
+						</div>
+						<div class="col-s-1">
+							<label>Evidencias</label>
+							<input type="file" name="file[]" multiple>
+						</div>
+						<div class="col-s-12" style="text-align: center;">
+							<input type="submit" value="Guardar">
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
-	</div>
+
+		<script type="text/javascript">
+			function ponderacion(){
+				
+				var valor = 5;
+				var sel = document.getElementById("pond");
+
+				for (var i = 1; i <= 20; i++) {
+					var option = document.createElement('option');
+						option.setAttribute("value", valor);
+						var text = document.createTextNode(valor + "%");
+
+					option.appendChild(text);
+					sel.appendChild(option);
+					valor = valor + 5;
+				}
+			}
+			ponderacion();
+		</script>
 @stop

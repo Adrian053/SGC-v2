@@ -176,6 +176,11 @@
       .col-s-10 {width: 83.33%;}
       .col-s-11 {width: 91.66%;}
       .col-s-12 {width: 100%;}
+
+      .col-ss-0 {width: 3.33%;}
+      .col-ss-1 {width: 20%;}
+      .col-ss-2 {width: 12.88%;}
+      .col-ss-3 {width: 11.88%;}
     }
 
       .col-1 {width: 8.33%;}

@@ -34,7 +34,7 @@ class identificacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect('/Acciones');
     }
 
     /**

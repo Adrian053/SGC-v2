@@ -6,7 +6,7 @@
 			<div class="col-md-8">
 				<div class="card">
 				<div class="card-header">Identificación</div>
-					<form method="POST" action="/Generalidades">
+					<form method="POST" action="/Identificacion">
 						@csrf
 						<div class="row">
 							<div>
@@ -19,15 +19,18 @@
 						<div class="row">
 							<div class="col-s-7">
 								<label for="Procesos" class="col-md-4 col-form-label text-md-right">Procesos involucrados</label>
-								<div class="col-md-6">
-									<select class="form-control" id="Procesos" name="Procesos" type="integer" multiple>
-										<option value="1">proceso 1</option>
-										<option value="2">proceso 2</option>
-										<option value="3">proceso 3</option>
-										<option value="4">proceso 4</option>
-										<option value="5">proceso 5</option>
-									</select>
-								</div>
+								<label style="border: solid 1px gray; padding: 2px;">
+									proceso 1 <input type="checkbox" name="">
+								</label>
+								<label style="border: solid 1px gray; padding: 2px;">
+									proceso 2 <input type="checkbox" name="">
+								</label>
+								<label style="border: solid 1px gray; padding: 2px;">
+									proceso 3 <input type="checkbox" name="">
+								</label>
+								<label style="border: solid 1px gray; padding: 2px;">
+									proceso 4 <input type="checkbox" name="">
+								</label>
 							</div>
 						</div>
 						<div class="row">
@@ -52,6 +55,11 @@
 								<div class="col-md-4">
 									<textarea id="meta" name="meta"></textarea>
 								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-s-12" style="text-align: center">
+								<input type="submit" value="Guardar">
 							</div>
 						</div>
 					</form>
