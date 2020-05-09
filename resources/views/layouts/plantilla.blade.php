@@ -324,6 +324,10 @@
 
         .show {display: block;}
 
+        .rborder {
+          border-right: solid 1px gray;
+        }
+
     </style>
 
   </head>
