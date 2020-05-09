@@ -8,7 +8,7 @@
 		<div class="col-md-11">
 			<div class="card">
 				<div class="card-header">Acciones</div>
-				<form id="form_acc" method="POST" action="/Acciones">
+				<form id="form_acc" method="POST" onsubmit="return valsub();" action="/Acciones">
 					@csrf
 					<div class="row">
 						<div class="col-ss-0 rborder">
@@ -41,8 +41,8 @@
 					</div>
 					<div id="1"></div>
 					<div class="col-s-12" style="text-align: center;">
-							<input type="submit" value="Guardar">
-						</div>
+						<input id="su" onclick="sub()" type="submit" value="Guardar">
+					</div>
 				</form>
 			</div>
 		</div>
@@ -78,6 +78,7 @@
 
 							var in_desc = document.createElement('textarea');
 							in_desc.setAttribute('name', 'desc' + No);
+							in_desc.setAttribute('required', '');
 							in_desc.style.width = "100%";
 
 						div_desc.appendChild(in_desc);
@@ -90,6 +91,7 @@
 
 							var in_resp = document.createElement('textarea');
 							in_resp.setAttribute('name', 'resp' + No);
+							in_resp.setAttribute('required', '');
 							in_resp.style.width = "100%";
 
 						div_resp.appendChild(in_resp);
@@ -102,6 +104,7 @@
 
 							var in_rec = document.createElement('textarea');
 							in_rec.setAttribute('name', 'rec' + No);
+							in_rec.setAttribute('required', '');
 
 						div_rec.appendChild(in_rec);
 
@@ -114,6 +117,7 @@
 							var in_Fini = document.createElement('input');
 							in_Fini.setAttribute('name', 'Fini' + No);
 							in_Fini.setAttribute('type', 'date');
+							in_Fini.setAttribute('required', '');
 
 						div_Fini.appendChild(in_Fini);
 
@@ -127,6 +131,13 @@
 							sel_pond.classList.add('form-control')
 							sel_pond.setAttribute('id', 'pond' + No);
 							sel_pond.setAttribute('type', 'integer');
+
+								var option = document.createElement('option');
+								option.setAttribute("value", 0);
+									var text = document.createTextNode("---");
+
+								option.appendChild(text);
+							sel_pond.appendChild(option);
 
 								var valor = 5;
 								for (var i = 1; i <= 20; i++) {
@@ -187,6 +198,7 @@
 							var in_Ffinal = document.createElement('input');
 							in_Ffinal.setAttribute('type', 'date');
 							in_Ffinal.setAttribute('name', 'Ffinal' + No);
+							in_Ffinal.setAttribute('required', '');
 
 						div_Ffinal.appendChild(in_Ffinal);
 
@@ -208,6 +220,36 @@
 				No = No + 1;
 			}else{
 				alert("No se pueden añadir mas renglones");
+			}
+		}
+		add_form();
+	</script>
+
+	<script type="text/javascript">
+		var pond=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+		function ponderacion(id, i){
+			var e = document.getElementById(id);
+			var valor = e.options[e.selectedIndex].value;
+			pond[(i-1)]=valor;
+		}
+
+		function total(){
+			var total = 0;
+			var id;
+			for (var i =  1; i < No; i++) {
+				id = "pond" + i;
+				ponderacion(id, i);
+				total = total + parseInt(pond[(i-1)]);
+			}
+			return total;
+		}
+
+		function valsub() {
+			if(total() == 100){
+				return true;
+			}else{
+				alert("el total debe ser 100%\ntotal = " + total() + "%");
+				return false;
 			}
 		}
 	</script>
