@@ -16,6 +16,17 @@ class CreateActionsTable extends Migration
         Schema::create('actions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->Integer('numero');
+            $table->longText('descripcion');
+            $table->text('responsable');
+            $table->text('recursos');
+            $table->date('F_inicio');
+            $table->integer('ponderacion');
+            $table->string('estado');
+            $table->date('F_finalizacion');
+            $table->text('evidencias');
+            $table->bigInteger('gen_id')->unsigned();
+            $table->foreign('gen_id')->references('id')->on('generalities')->onDelete('cascade');
         });
     }
 

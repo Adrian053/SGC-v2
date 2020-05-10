@@ -16,6 +16,13 @@ class CreateGeneralitiesTable extends Migration
         Schema::create('generalities', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->Integer('objetivo');
+            $table->Integer('year');
+            $table->date('F_aprovacion');
+            $table->date('F_apertura');
+            $table->date('F_cumplimiento');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

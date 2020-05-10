@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Identification;
+use App\Generality;
 
 class identificacionController extends Controller
 {
@@ -11,9 +13,10 @@ class identificacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $id)
     {
-        return view('PlanificacionForms.identificacion');
+
+        return view('PlanificacionForms.identificacion', compact('id'));
     }
 
     /**
@@ -34,7 +37,19 @@ class identificacionController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect('/Acciones');
+        $iden = new identification();
+        $iden->obj_descripcion = $request->input('descripcion');
+        $procesos = [$request->input('one'),$request->input('two'),$request->input('three')];
+        $json = json_encode($procesos);
+        $iden->procesos = $json;
+        $iden->responsable = $request->input('responsable');
+        $iden->indicador = $request->input('indicador');
+        $iden->meta = $request->input('meta');
+        $iden->gen_id = $request->input('gen_id');
+        $iden->save();
+
+        return redirect()->action('accionesController@index', ['id' => $iden->gen_id]);
+        //return redirect('/Acciones');
     }
 
     /**
@@ -45,7 +60,7 @@ class identificacionController extends Controller
      */
     public function show($id)
     {
-        //
+        return "show";
     }
 
     /**

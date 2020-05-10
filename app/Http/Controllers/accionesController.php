@@ -12,7 +12,7 @@ class accionesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $id)
     {
         return view('PlanificacionForms.acciones');
     }

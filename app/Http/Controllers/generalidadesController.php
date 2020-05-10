@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Generality;
+use Illuminate\Support\Facades\DB;
+use Auth;
 
 class generalidadesController extends Controller
 {
@@ -35,7 +37,19 @@ class generalidadesController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect("/Identificacion");
+        $gen = new Generality();
+        $gen->objetivo = $request->input('No_Obj');
+        $gen->year = $request->input('year');
+        $gen->F_aprovacion = $request->input('F_aprovacion');
+        $gen->F_apertura = $request->input('F_apertura');
+        $gen->F_cumplimiento = $request->input('F_cumplimiento');
+        $gen->user_id = Auth::user()->id;
+        $gen->save();
+
+        //return redirect()->action('identificacionController@index', ['year' => $gen->year, 'obj' => $gen->objetivo]);
+        //return redirect()->route('Identificacion.index', ['id'=>17]);
+        //return redirect("/Identificacion");
+        return redirect()->action('identificacionController@index', ['id' => $gen->id]);
     }
 
     /**

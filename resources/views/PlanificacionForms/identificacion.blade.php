@@ -26,11 +26,11 @@
 								</div>
 								<div id="checkboxes">
 									<label for="one">
-									<input type="checkbox" id="one" />Proceso 1</label>
+									<input type="checkbox" name="one" id="one" checked="" value="Proceso 1" />Proceso 1</label>
 									<label for="two">
-									<input type="checkbox" id="two" />Proceso 2</label>
+									<input type="checkbox" name="two" id="two" value="Proceso 2"/>Proceso 2</label>
 									<label for="three">
-									<input type="checkbox" id="three" />Proceso 3</label>
+									<input type="checkbox" name="three" id="three" value="Proceso 3"/>Proceso 3</label>
 								</div>
 							</div>
 						</div>
@@ -57,6 +57,7 @@
 									<textarea id="meta" name="meta" style="width: 100%;" required=""></textarea>
 								</div>
 							</div>
+							<input type="hidden" name="gen_id" value="{{$id->id}}">
 						</div>
 						<div class="row">
 							<div class="col-s-12" style="text-align: center">

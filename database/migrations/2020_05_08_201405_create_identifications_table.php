@@ -16,6 +16,13 @@ class CreateIdentificationsTable extends Migration
         Schema::create('identifications', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->longText('obj_descripcion');
+            $table->text('procesos');
+            $table->text('responsable');
+            $table->text('indicador');
+            $table->text('meta');
+            $table->bigInteger('gen_id')->unsigned();
+            $table->foreign('gen_id')->references('id')->on('generalities')->onDelete('cascade');
         });
     }
 
