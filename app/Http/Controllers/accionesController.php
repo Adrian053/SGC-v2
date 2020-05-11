@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Action;
+use Auth;
+use File;
 
 class accionesController extends Controller
 {
@@ -14,7 +16,7 @@ class accionesController extends Controller
      */
     public function index(Request $id)
     {
-        return view('PlanificacionForms.acciones');
+        return view('PlanificacionForms.acciones', compact('id'));
     }
 
     /**
@@ -35,7 +37,58 @@ class accionesController extends Controller
      */
     public function store(Request $request)
     {
-        return "acciones store";
+        $tot = $request->input('total');
+        $acc = new Action();
+
+        $num = array();
+        $desc = array();
+        $resp = array();
+        $rec = array();
+        $Fini = array();
+        $pond = array();
+        $estado = array();
+        $Ffinal = array();
+        $evid = array();
+        $archivos = array();
+        $path = public_path(Auth::user()->name.'/Evidencias');
+
+        if(!File::isDirectory($path)){
+            File::makeDirectory($path, 0777, true, true);
+        }
+
+           for ($i=0; $i < $tot; $i++) {
+                $num[$i] = $request->input('No'.($i + 1));
+                $desc[$i] = $request->input('desc'.($i + 1));
+                $resp[$i] = $request->input('resp'.($i + 1));
+                $rec[$i] = $request->input('rec'.($i + 1));
+                $Fini[$i] = $request->input('Fini'.($i + 1));
+                $pond[$i] = $request->input('pond'.($i + 1));
+                $estado[$i] = $request->input('estado'.($i + 1));
+                $Ffinal[$i] = $request->input('Ffinal'.($i + 1));
+                if($request->hasFile('file'.($i + 1))){
+                    $files = $request->file('file'.($i + 1));
+                    $n=0;
+                    foreach($files as $file){
+                        $filename = time().$file->getClientOriginalName();
+                        $archivos[$n] = $filename;
+                        $n = $n + 1;
+                        $file->move(public_path().'/'.Auth::user()->name.'/Evidencias', $filename);
+                    }
+                    $evid[$i] = $archivos;
+                }
+            }
+        $acc->numero = json_encode($num);
+        $acc->descripcion = json_encode($desc);
+        $acc->responsable = json_encode($resp);
+        $acc->recursos = json_encode($rec);
+        $acc->F_inicio = json_encode($Fini);
+        $acc->ponderacion = json_encode($pond);
+        $acc->estado = json_encode($estado);
+        $acc->F_finalizacion = json_encode($Ffinal);
+        $acc->evidencias = json_encode($evid);
+        $acc->gen_id = $request->input('gen_id');
+        $acc->save();
+        return redirect('/Planificacion');
     }
 
     /**

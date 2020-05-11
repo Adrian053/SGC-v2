@@ -8,7 +8,7 @@
 		<div class="col-md-11">
 			<div class="card">
 				<div class="card-header">Acciones</div>
-				<form id="form_acc" method="POST" onsubmit="return valsub();" action="/Acciones">
+				<form id="form_acc" method="POST" onsubmit="return valsub();" action="/Acciones" enctype="multipart/form-data">
 					@csrf
 					<div class="row">
 						<div class="col-ss-0 rborder">
@@ -49,7 +49,7 @@
 	</div>
 
 	<script type="text/javascript">
-		var No = 1
+		var No = 1;
 		function add_form(){
 			if (No < 21) {
 				var form = document.getElementById('1');
@@ -130,6 +130,7 @@
 							var sel_pond = document.createElement('select');
 							sel_pond.classList.add('form-control')
 							sel_pond.setAttribute('id', 'pond' + No);
+							sel_pond.setAttribute('name', 'pond' + No);
 							sel_pond.setAttribute('type', 'integer');
 
 								var option = document.createElement('option');
@@ -241,11 +242,25 @@
 				ponderacion(id, i);
 				total = total + parseInt(pond[(i-1)]);
 			}
+
 			return total;
 		}
 
 		function valsub() {
 			if(total() == 100){
+				var f = document.getElementById('form_acc');
+				var tot = document.createElement('input');
+				tot.setAttribute('type', 'hidden');
+				tot.setAttribute('name', 'total');
+				tot.setAttribute('value', No-1);
+
+				var genid = document.createElement('input');
+				genid.setAttribute('type', 'hidden');
+				genid.setAttribute('name', 'gen_id');
+				genid.setAttribute('value', {{$id->id}});
+
+				f.appendChild(tot);
+				f.appendChild(genid);
 				return true;
 			}else{
 				alert("el total debe ser 100%\ntotal = " + total() + "%");
