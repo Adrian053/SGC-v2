@@ -14,7 +14,7 @@ class CreateGeneralitiesTable extends Migration
     public function up()
     {
         Schema::create('generalities', function (Blueprint $table) {
-            $table->id();
+            $table->id('gen_id');
             $table->timestamps();
             $table->Integer('objetivo');
             $table->Integer('year');

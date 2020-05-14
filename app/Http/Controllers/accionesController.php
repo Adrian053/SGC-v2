@@ -86,7 +86,7 @@ class accionesController extends Controller
         $acc->estado = json_encode($estado);
         $acc->F_finalizacion = json_encode($Ffinal);
         $acc->evidencias = json_encode($evid);
-        $acc->gen_id = $request->input('gen_id');
+        $acc->gen_id2 = $request->input('gen_id');
         $acc->save();
         return redirect('/Planificacion');
     }

@@ -252,6 +252,7 @@
       padding: 20px;
       border: 1px solid #888;
       width: 80%;
+      min-width: 360px;
     }
 
     /* The Close Button */
@@ -360,6 +361,25 @@
 
         #checkboxes label:hover {
           background-color: #1e90ff;
+        }
+
+        .search {
+          width: 130px;
+          box-sizing: border-box;
+          border: 2px solid #ccc;
+          border-radius: 4px;
+          font-size: 16px;
+          background-color: white;
+          background-image: url('/img/icon_search.png');
+          background-position: 10px 10px; 
+          background-size: 25px 25px;
+          background-repeat: no-repeat;
+          padding: 12px 20px 12px 40px;
+          transition: width 0.4s ease-in-out;
+        }
+
+        .search:focus {
+          width: 100%;
         }
 
     </style>

@@ -34,8 +34,8 @@ class CreateActionsTable extends Migration
             $table->text('estado');
             $table->text('F_finalizacion');
             $table->text('evidencias');
-            $table->bigInteger('gen_id')->unsigned();
-            $table->foreign('gen_id')->references('id')->on('generalities')->onDelete('cascade');
+            $table->bigInteger('gen_id2')->unsigned();
+            $table->foreign('gen_id2')->references('gen_id')->on('generalities')->onDelete('cascade');
         });
     }
 

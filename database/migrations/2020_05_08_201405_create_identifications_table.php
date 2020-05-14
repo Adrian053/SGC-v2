@@ -21,8 +21,8 @@ class CreateIdentificationsTable extends Migration
             $table->text('responsable');
             $table->text('indicador');
             $table->text('meta');
-            $table->bigInteger('gen_id')->unsigned();
-            $table->foreign('gen_id')->references('id')->on('generalities')->onDelete('cascade');
+            $table->bigInteger('gen_id2')->unsigned();
+            $table->foreign('gen_id2')->references('gen_id')->on('generalities')->onDelete('cascade');
         });
     }
 

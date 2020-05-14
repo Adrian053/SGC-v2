@@ -3,22 +3,48 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Identification;
+use Illuminate\Support\Facades\DB;
 use App\Generality;
 
-class identificacionController extends Controller
+class editarController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $id)
+    public function index()
     {
-
-        return view('PlanificacionForms.identificacion', compact('id'));
+        $id = 0;
+        return view('editarForms.editMenu', compact('id'));
     }
 
+    /*public function buscar(Request $request){
+        $obj = $request->input('s_obj');
+        $year = $request->input('s_year');
+        $form = DB::table('generalities')->where([['objetivo', "{$obj}"],['year', "{$year}"]])->select('gen_id')->get();
+
+        if(count($form) != 0){
+            $array = get_object_vars($form[0]);
+            $id = $array['gen_id'];
+            return view('editarForms.editMenu', compact('id', 'obj', 'year'));
+        }else{
+            $id = -1;
+            return view('editarForms.editMenu', compact('id', 'obj', 'year'));
+        }
+
+    }
+
+    public function editar($id){
+        $form = DB::table('generalities')->where('gen_id', $id)->get();
+        $array = get_object_vars($form[0]);
+
+        $id = $array['gen_id'];
+        $F_aprovacion = $array['F_aprovacion'];
+        $F_apertura = $array['F_apertura'];
+        $F_cumplimiento = $array['F_cumplimiento'];
+        return $F_cumplimiento;
+    }*/
     /**
      * Show the form for creating a new resource.
      *
@@ -37,19 +63,7 @@ class identificacionController extends Controller
      */
     public function store(Request $request)
     {
-        $iden = new identification();
-        $iden->obj_descripcion = $request->input('descripcion');
-        $procesos = [$request->input('one'),$request->input('two'),$request->input('three')];
-        $json = json_encode($procesos);
-        $iden->procesos = $json;
-        $iden->responsable = $request->input('responsable');
-        $iden->indicador = $request->input('indicador');
-        $iden->meta = $request->input('meta');
-        $iden->gen_id2 = $request->input('gen_id');
-        $iden->save();
-
-        return redirect()->action('accionesController@index', ['id' => $iden->gen_id2]);
-        //return redirect('/Acciones');
+        //
     }
 
     /**
@@ -60,7 +74,7 @@ class identificacionController extends Controller
      */
     public function show($id)
     {
-        return "show";
+        //
     }
 
     /**

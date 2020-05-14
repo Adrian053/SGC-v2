@@ -26,6 +26,11 @@ Route::group(['middleware' => ['auth', 'isUsuario']], function() {
     Route::resource('/Generalidades', 'generalidadesController');
     Route::resource('/Identificacion', 'identificacionController');
     Route::resource('/Acciones', 'accionesController');
+    Route::resource('/Editar', 'editarController');
+    Route::post('/editsearch', 'generalidadesController@buscar');
+    Route::get('/Generalidades/{id}', 'generalidadesController@show');
+    /*Route::post('/editsearch', 'editarController@buscar');
+    Route::get('/editsearch/{id}', 'editarController@editar');*/
 });
 
 //Route::get('/home', 'HomeController@index')->name('home');
