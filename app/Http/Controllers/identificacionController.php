@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Identification;
 use App\Generality;
 
@@ -60,7 +61,17 @@ class identificacionController extends Controller
      */
     public function show($id)
     {
-        return "show";
+        $form = DB::table('identifications')->where('gen_id2', $id)->get();
+        $array = get_object_vars($form[0]);
+
+        $gen_id2 = $id;
+        $id = $array['id'];
+        $desc = $array['obj_descripcion'];
+        $procesos = json_decode($array['procesos']);
+        $responsable = $array['responsable'];
+        $indicador = $array['indicador'];
+        $meta = $array['meta'];
+        return view('editarForms.editIdentificacion', compact('id', 'desc', 'procesos','responsable', 'indicador', 'meta', 'gen_id2'));
     }
 
     /**
@@ -83,7 +94,19 @@ class identificacionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $procesos = [$request->input('one'),$request->input('two'),$request->input('three')];
+        $json = json_encode($procesos);
+
+        DB::table('identifications')->where('id', $id)->update(['obj_descripcion' => $request->input('descripcion'), 'procesos' => $json, 'responsable' => $request->input('responsable'), 'indicador' => $request->input('indicador'), 'meta' => $request->input('meta')]);
+                
+        $id = $request->input('gen_id2');
+
+        $form = DB::table('generalities')->where('gen_id', $id)->select('objetivo','year')->get();
+        $array = get_object_vars($form[0]);
+
+        $year = $array['year'];
+        $obj = $array['objetivo'];
+        return view('editarForms.editMenu', compact('id', 'obj', 'year'));
     }
 
     /**

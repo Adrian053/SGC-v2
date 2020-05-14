@@ -1,7 +1,6 @@
 @extends('layouts.plantilla')
 
 @section('content')
-
 	<div class="row">
 		<div class="col-4" style="margin-left: 10px;">
 			<button class="btn" onclick="mostrar('buscar');"><i class="fa fa-search"></i></button>
@@ -45,7 +44,7 @@
 		</div>
 	</div>
 
-	@if($id != 0)
+	@if($id > 0)
 		<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-8">
@@ -56,7 +55,7 @@
 					</div>
 					<div class="row" style="margin-left: 10px; margin-top: 20px;">
 						<a class="btn" href="/Generalidades/{{$id}}" style="margin-bottom: 10px; margin-right: 10px;">Generalidades</a>
-						<a class="btn" href="#" style="margin-bottom: 10px; margin-right: 10px;">Identificacion</a>
+						<a class="btn" href="/Identificacion/{{$id}}" style="margin-bottom: 10px; margin-right: 10px;">Identificacion</a>
 						<a class="btn" href="#" style="margin-bottom: 10px; margin-right: 10px;">Acciones</a>
 					</div>
 				</div>
