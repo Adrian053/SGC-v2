@@ -56,7 +56,7 @@
 					<div class="row" style="margin-left: 10px; margin-top: 20px;">
 						<a class="btn" href="/Generalidades/{{$id}}" style="margin-bottom: 10px; margin-right: 10px;">Generalidades</a>
 						<a class="btn" href="/Identificacion/{{$id}}" style="margin-bottom: 10px; margin-right: 10px;">Identificacion</a>
-						<a class="btn" href="#" style="margin-bottom: 10px; margin-right: 10px;">Acciones</a>
+						<a class="btn" href="/Acciones/{{$id}}" style="margin-bottom: 10px; margin-right: 10px;">Acciones</a>
 					</div>
 				</div>
 			</div>

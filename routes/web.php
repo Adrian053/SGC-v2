@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth', 'isUsuario']], function() {
     Route::post('/editsearch', 'generalidadesController@buscar');
     Route::get('/Generalidades/{id}', 'generalidadesController@show');
     Route::post('/Identificacion/{$id}', 'identificacionController@show');
+    Route::post('/Acciones/{$id}', 'accionesController@show');
     /*Route::post('/editsearch', 'editarController@buscar');
     Route::get('/editsearch/{id}', 'editarController@editar');*/
 });

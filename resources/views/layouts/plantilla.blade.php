@@ -226,6 +226,14 @@
       cursor: pointer;
     }
 
+    .btnminus {
+      background-color: red;
+      border: none;
+      color: white;
+      cursor: pointer;
+      width: 100%;
+    }
+
     /* The Modal (background) */
     .modal {
       display: none; /* Hidden by default */
