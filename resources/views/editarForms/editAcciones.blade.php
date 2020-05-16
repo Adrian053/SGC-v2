@@ -3,7 +3,7 @@
 @section('content')
 	<div class="row justify-content-center">
 		<div>
-			<button class="btn" onclick="add_form();"><i class="fa fa-plus"></i></button>
+			<button class="btn" onclick="add_form(); add_num();"><i class="fa fa-plus"></i></button>
 		</div>
 		<div class="col-md-11">
 			<div class="card">
@@ -50,21 +50,28 @@
 	</div>
 
 	<script type="text/javascript">
+		var usrname = @json(Auth::user()->name);
+		var num = @json($num);
 		var No = 1;
 		var desc = @json($desc);
 		var resp = @json($resp);
 		var rec = @json($rec);
 		var Fini = @json($F_inicio);
-		var pond = @json($pond);
+		var pon = @json($pond);
 		var est = @json($est);
 		var Ffin = @json($F_final);
 		var evid = @json($evid);
+
+		function add_num(){
+			num[No-2] = No-1;
+		}
 
 		function add_form(numero){
 			if (No < 21) {
 				var form = document.getElementById('1');
 					var row = document.createElement('div');
 					row.classList.add('row');
+					row.setAttribute('id', 'row' + No);
 
 						var div_No = document.createElement('div');
 						div_No.classList.add('col-ss-0');
@@ -72,8 +79,11 @@
 
 							var minus = document.createElement('button');
 							minus.classList.add('btnminus');
+							minus.setAttribute('type', 'button');
+							minus.setAttribute('value', No);
+							minus.setAttribute('id', 'min' + No);
 							minus.style = "margin-left: -30px; margin-right: 10px;";
-							//minus.onclick = function() {add_form();};
+							minus.onclick = function() {min(minus.value);};
 
 								var i = document.createElement('i');
 								i.classList.add('fa');
@@ -181,8 +191,7 @@
 									var option = document.createElement('option');
 										option.setAttribute("value", valor);
 										var text = document.createTextNode(valor + "%");
-
-										if(valor == pond[numero-1]){
+										if(valor == pon[numero-1]){
 											option.setAttribute("selected", '');
 										}
 
@@ -259,12 +268,138 @@
 						var div_evid = document.createElement('div');
 						div_evid.classList.add('col-s-1');
 
-							var in_evid = document.createElement('input');
+							/*var in_evid = document.createElement('input');
 							in_evid.setAttribute('type', 'file');
 							in_evid.setAttribute('name', 'file' + No + '[]');
-							in_evid.setAttribute('multiple', '');
+							in_evid.setAttribute('multiple', '');*/
+							var but_evi = document.createElement('button');
+							but_evi.classList.add('btn')
+							but_evi.classList.add('fa')
+							but_evi.classList.add('fa-folder-open');
+							but_evi.setAttribute('type', 'button');
+							but_evi.setAttribute('value', 'mod' + No);
+							but_evi.onclick = function() {mostrar(but_evi.value)}
+							
+								div_mod = document.createElement('div');
+								div_mod.classList.add('modal');
+								div_mod.setAttribute('id', 'mod' + No);
 
-						div_evid.appendChild(in_evid);
+									div_cont = document.createElement('div');
+									div_cont.classList.add('container');
+									div_cont.classList.add('modal-content');
+									div_cont.setAttribute('id', 'cont' + No);
+
+										div_btadd = document.createElement('div')
+										div_btadd.classList.add('row');
+										div_btadd.setAttribute('style', 'margin-bottom: 10px;');
+
+											var btn_add = document.createElement('button');
+											btn_add.setAttribute('type', 'button');
+											btn_add.setAttribute('value', 'add' + No);
+											btn_add.setAttribute('style', 'margin-right: 10px;')
+											btn_add.onclick = function() {show_bf(btn_add.value)}
+
+												var text = document.createTextNode("Añadir archivo");
+
+											btn_add.appendChild(text);
+
+										div_btadd.appendChild(btn_add);
+
+											var in_file = document.createElement('input');
+											in_file.setAttribute('type', 'file');
+											in_file.setAttribute('id', 'add' + No);
+											in_file.style.display = "none";
+											in_file.setAttribute('multiple', '');
+											in_file.setAttribute('name', 'files' + No + '[]');
+
+										div_btadd.appendChild(in_file);
+
+									div_cont.appendChild(div_btadd);
+
+										if(evid.length != 0){
+											for(var x = 0; x<pon.length; x++){
+												var div_files = document.createElement('div');
+												div_files.classList.add('row');
+												div_files.classList.add('smlist');
+
+													var p_file = document.createElement('p');
+														var text = document.createTextNode(pon[x]);
+													p_file.appendChild(text);
+
+												div_files.appendChild(p_file);
+
+													var a_file = document.createElement('a');
+													a_file.classList.add('smallbtn');
+													a_file.setAttribute('target', '_blank');
+													a_file.setAttribute('href', 'http://localhost:8000/' + usrname + '/Evidencias/' + 'Manualhtml.pdf');
+													a_file.setAttribute('target', '_blank');
+													a_file.setAttribute('style', 'margin-left: 70%;');
+
+														var text = document.createTextNode("ver");
+													
+													a_file.appendChild(text);
+
+												div_files.appendChild(a_file);
+
+													var btn_elim = document.createElement('button');
+													btn_elim.classList.add('smallbtn');
+													btn_elim.setAttribute('type', 'button');
+													btn_elim.setAttribute('style', 'background-color: #DF0101; margin-left: 10px;');
+
+														var text = document.createTextNode('Eliminar');
+
+													btn_elim.appendChild(text);
+
+												div_files.appendChild(btn_elim);
+
+									div_cont.appendChild(div_files);
+											}
+										}else{
+											var div_void = document.createElement('div');
+											div_void.classList.add('row');
+
+												var text = document.createTextNode("No hay evidencias");
+												
+											div_void.appendChild(text);
+
+									div_cont.appendChild(div_void);
+										}
+
+										var div_btns = document.createElement('div');
+										div_btns.classList.add('row');
+
+											var btn_acept = document.createElement('button');
+											btn_acept.classList.add('btn');
+											btn_acept.setAttribute('type', 'button');
+											btn_acept.setAttribute('value', 'mod' + No);
+											btn_acept.setAttribute('style', 'margin-right: 15px;')
+											btn_acept.onclick = function() {cancelar(btn_acept.value)}
+
+												var text = document.createTextNode('Aceptar');
+
+											btn_acept.appendChild(text);
+
+										div_btns.appendChild(btn_acept);
+
+											var btn_cancel = document.createElement('button');
+											btn_cancel.classList.add('btn');
+											btn_cancel.setAttribute('type', 'button');
+											btn_cancel.setAttribute('id', 'reset' + No);
+											btn_cancel.setAttribute('value', No);
+											btn_cancel.onclick = function() {cancelar('mod' + btn_cancel.value), reset_bf('add' + btn_cancel.value)}
+
+												var text = document.createTextNode('Cancelar');
+
+											btn_cancel.appendChild(text);
+
+										div_btns.appendChild(btn_cancel);
+
+									div_cont.appendChild(div_btns);
+
+								div_mod.appendChild(div_cont);
+
+						div_evid.appendChild(but_evi);
+						div_evid.appendChild(div_mod);
 
 					row.appendChild(div_evid);
 
@@ -276,13 +411,45 @@
 		}
 		
 		function rows(){
-			var num = @json($num);
 			for(var i = 0; i<num.length; i++){
-				add_form(num[i]);
+					add_form(num[i]);
 			}
 		}
 
 		rows();
+
+		function min(menos){
+			for(var i = 1; i<=num.length; i++){
+				var r = document.getElementById('row' + i);	
+				r.parentNode.removeChild(r);
+			}
+			No = 1;
+			const index = num.indexOf(menos);
+			num.splice(index, 1);
+			rows();
+		}
+
+		function show_bf(id){
+			var butt = document.getElementById(id);
+			butt.style.display = "block";
+		}
+
+		function reset_bf(reset_in){
+	        var field = document.getElementById(reset_in);
+	        field.value= field.defaultValue;
+		}
+	</script>
+
+	<script type="text/javascript">
+		function mostrar(modalid){
+			var modal = document.getElementById(modalid);
+			modal.style.display = 'block';
+		}
+
+		function cancelar(cancelid){
+			var cancel = document.getElementById(cancelid);
+			cancel.style.display = "none";
+		}
 	</script>
 
 	<script type="text/javascript">

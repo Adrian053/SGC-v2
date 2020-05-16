@@ -211,6 +211,22 @@
       cursor: pointer;
     }
 
+    .smallbtn{
+      background-color: DodgerBlue;
+      border: none;
+      color: white;
+      padding: 1px 10px;
+      font-size: 16px;
+      cursor: pointer;
+      height: 25px;
+    }
+
+    .smlist {
+      border-bottom: solid 1px gray;
+      height: 30px;
+      margin-bottom: 10px;
+    }
+
     /* Darker background on mouse-over */
     .btn:hover {
       background-color: RoyalBlue;
