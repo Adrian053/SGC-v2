@@ -62,6 +62,17 @@
 		var Ffin = @json($F_final);
 		var evid = @json($evid);
 
+		Object.size = function(obj) {
+		    var size = 0, key;
+		    for (key in obj) {
+		        if (obj.hasOwnProperty(key)) size++;
+		    }
+		    return size;
+		};
+
+		// Get the size of an object
+		var size = Object.size(evid);
+
 		function add_num(){
 			num[No-2] = No-1;
 		}
@@ -316,43 +327,56 @@
 
 									div_cont.appendChild(div_btadd);
 
-										if(evid.length != 0){
-											for(var x = 0; x<pon.length; x++){
+										if(size != 0){
+											if(evid[numero-1] != undefined){
+												for(var x = 0; x<evid[numero-1].length; x++){
+													var div_files = document.createElement('div');
+													div_files.classList.add('row');
+													div_files.classList.add('smlist');
+
+														var p_file = document.createElement('p');
+															var text = document.createTextNode(evid[numero-1][x]);
+														p_file.appendChild(text);
+
+													div_files.appendChild(p_file);
+
+														var a_file = document.createElement('a');
+														a_file.classList.add('smallbtn');
+														a_file.setAttribute('target', '_blank');
+														a_file.setAttribute('href', 'http://localhost:8000/' + usrname + '/Evidencias/' + evid[numero-1][x]);
+														a_file.setAttribute('target', '_blank');
+														a_file.setAttribute('style', 'margin-left: 10%;');
+
+															var text = document.createTextNode("ver");
+														
+														a_file.appendChild(text);
+
+													div_files.appendChild(a_file);
+
+														var btn_elim = document.createElement('button');
+														btn_elim.classList.add('smallbtn');
+														btn_elim.setAttribute('type', 'button');
+														btn_elim.setAttribute('style', 'background-color: #DF0101; margin-left: 10px;');
+
+															var text = document.createTextNode('Eliminar');
+
+														btn_elim.appendChild(text);
+
+													div_files.appendChild(btn_elim);
+
+										div_cont.appendChild(div_files);
+												}
+											}else{
 												var div_files = document.createElement('div');
 												div_files.classList.add('row');
 												div_files.classList.add('smlist');
 
-													var p_file = document.createElement('p');
-														var text = document.createTextNode(pon[x]);
+													var p_file = document.createElement('h3');
+														var text = document.createTextNode("No hay archivos");
 													p_file.appendChild(text);
 
 												div_files.appendChild(p_file);
-
-													var a_file = document.createElement('a');
-													a_file.classList.add('smallbtn');
-													a_file.setAttribute('target', '_blank');
-													a_file.setAttribute('href', 'http://localhost:8000/' + usrname + '/Evidencias/' + 'Manualhtml.pdf');
-													a_file.setAttribute('target', '_blank');
-													a_file.setAttribute('style', 'margin-left: 70%;');
-
-														var text = document.createTextNode("ver");
-													
-													a_file.appendChild(text);
-
-												div_files.appendChild(a_file);
-
-													var btn_elim = document.createElement('button');
-													btn_elim.classList.add('smallbtn');
-													btn_elim.setAttribute('type', 'button');
-													btn_elim.setAttribute('style', 'background-color: #DF0101; margin-left: 10px;');
-
-														var text = document.createTextNode('Eliminar');
-
-													btn_elim.appendChild(text);
-
-												div_files.appendChild(btn_elim);
-
-									div_cont.appendChild(div_files);
+										div_cont.appendChild(div_files);
 											}
 										}else{
 											var div_void = document.createElement('div');

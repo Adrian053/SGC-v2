@@ -70,7 +70,7 @@ class accionesController extends Controller
                     $files = $request->file('file'.($i + 1));
                     $n=0;
                     foreach($files as $file){
-                        $filename = time().$file->getClientOriginalName();
+                        $filename = $file->getClientOriginalName();
                         $archivos[$n] = $filename;
                         $n = $n + 1;
                         $file->move(public_path().'/'.Auth::user()->name.'/Evidencias', $filename);
