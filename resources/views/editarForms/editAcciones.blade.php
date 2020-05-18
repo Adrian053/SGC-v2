@@ -41,6 +41,7 @@
 						</div>
 					</div>
 					<div id="1"></div>
+					<div id="2"></div>
 					<div class="col-s-12" style="text-align: center;">
 						<input id="su" type="submit" value="Guardar">
 					</div>
@@ -61,6 +62,8 @@
 		var est = @json($est);
 		var Ffin = @json($F_final);
 		var evid = @json($evid);
+		var e = [];
+		var eliminar = [];
 
 		Object.size = function(obj) {
 		    var size = 0, key;
@@ -335,10 +338,13 @@
 													div_files.classList.add('smlist');
 
 														var p_file = document.createElement('p');
+														p_file.setAttribute('id', (numero-1) + "-" + x);
 															var text = document.createTextNode(evid[numero-1][x]);
 														p_file.appendChild(text);
 
 													div_files.appendChild(p_file);
+
+													e[No-1] = evid[numero-1];
 
 														var a_file = document.createElement('a');
 														a_file.classList.add('smallbtn');
@@ -353,16 +359,19 @@
 
 													div_files.appendChild(a_file);
 
-														var btn_elim = document.createElement('button');
+														/*var btn_elim = document.createElement('button');
 														btn_elim.classList.add('smallbtn');
 														btn_elim.setAttribute('type', 'button');
 														btn_elim.setAttribute('style', 'background-color: #DF0101; margin-left: 10px;');
+														btn_elim.setAttribute('value', (numero-1) + "-" + x);
+														btn_elim.setAttribute("onclick", "elim(" + "'" +btn_elim.value + "'" + ")");
+														
 
 															var text = document.createTextNode('Eliminar');
 
 														btn_elim.appendChild(text);
 
-													div_files.appendChild(btn_elim);
+													div_files.appendChild(btn_elim);*/
 
 										div_cont.appendChild(div_files);
 												}
@@ -462,6 +471,12 @@
 	        var field = document.getElementById(reset_in);
 	        field.value= field.defaultValue;
 		}
+
+		/*function elim(val){
+			var p = document.getElementById(val);
+			p.setAttribute('style', 'text-decoration: line-through; color: #BDBDBD;');
+			eliminar.push([val.substring(0,1),val.substring(2)]);
+		}*/
 	</script>
 
 	<script type="text/javascript">
@@ -509,11 +524,31 @@
 				genid.setAttribute('name', 'gen_id');
 				genid.setAttribute('value', {{$gen_id2}});
 
+				/*var elim = document.createElement('input');
+				elim.setAttribute('type', 'hidden');
+				elim.setAttribute('name', 'elim[]');
+				elim.setAttribute('value', eliminar);*/
+				
+				var d = document.getElementById("2");
+				for(var i = 0; i<e.length; i++){
+					if(e[i] != null){
+						for(var j = 0; j<e[i].length; j++){
+							var x = document.createElement('input');
+							x.setAttribute('type', 'hidden');
+							x.setAttribute('name', 'x' + i + '[]');
+							x.setAttribute('value', e[i][j]);
+							d.appendChild(x);
+						}
+					}
+					
+				}
+
 				f.appendChild(tot);
 				f.appendChild(genid);
+				f.appendChild(elim);
 				return true;
 			}else{
-				alert("el total debe ser 100%\ntotal = " + total() + "%");
+				alert("la ponderación total debe ser 100%\nponderación total = " + total() + "%");
 				return false;
 			}
 		}

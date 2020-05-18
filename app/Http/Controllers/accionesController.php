@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use App\Action;
+use App\Generality;
 use Auth;
 use File;
 
@@ -138,7 +141,75 @@ class accionesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return "update acc";
+
+        $tot = $request->input('total');
+        //$acc = new Action();
+
+        $num = array();
+        $desc = array();
+        $resp = array();
+        $rec = array();
+        $Fini = array();
+        $pond = array();
+        $estado = array();
+        $Ffinal = array();
+        $evid = array();
+        $archivos = array();
+        $e = array();
+
+        /*$form = DB::table('actions')->where('id', $id)->get();
+        $array = get_object_vars($form[0]);
+        $ev = json_decode($array["evidencias"], true);
+        $keys = array_keys($ev);
+
+        for($j=0; $j<sizeof($keys); $j++){
+            $evid[$keys[$j]] = $ev[$keys[$j]];
+        }*/
+
+
+           for ($i=0; $i < $tot; $i++) {
+                $num[$i] = $request->input('No'.($i + 1));
+                $desc[$i] = $request->input('desc'.($i + 1));
+                $resp[$i] = $request->input('resp'.($i + 1));
+                $rec[$i] = $request->input('rec'.($i + 1));
+                $Fini[$i] = $request->input('Fini'.($i + 1));
+                $pond[$i] = $request->input('pond'.($i + 1));
+                $estado[$i] = $request->input('estado'.($i + 1));
+                $Ffinal[$i] = $request->input('Ffinal'.($i + 1));
+                $e[$i] = $request->input('x'.$i);
+                $evid[$i] = [];
+                if($request->hasFile('files'.($i + 1))){
+                    $files = $request->file('files'.($i + 1));
+                    $n=0;
+                    foreach($files as $file){
+                        $filename = $file->getClientOriginalName();
+                        $archivos[$n] = $filename;
+                        $n = $n + 1;
+                    }
+                    $evid[$i] = $archivos;
+                }
+                if(sizeof($evid[$i]) != 0){
+                    if($e[$i] != null){
+                        for($j = 0; $j<sizeof($e[$i]); $j++){
+                            array_push($evid[$i], $e[$i][$j]);
+                        }
+                    }
+                }else{
+                    $evid[$i] = $e[$i];
+                }
+            }
+
+
+       DB::table('actions')->where('id', $id)->update(['numero' => $num, 'descripcion' => $desc, 'responsable' => $resp, 'recursos' => $rec, 'F_inicio' => $Fini, 'ponderacion' => $pond, 'estado' => $estado, 'F_finalizacion' => $Ffinal, 'evidencias' => $evid]);
+
+        $id = $request->input('gen_id');
+        $form = DB::table('generalities')->where('gen_id', $id)->select('objetivo','year')->get();
+        $array = get_object_vars($form[0]);
+
+        $year = $array['year'];
+        $obj = $array['objetivo'];
+        return view('editarForms.editMenu', compact('id', 'obj', 'year'));
+
     }
 
     /**
