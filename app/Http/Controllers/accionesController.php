@@ -73,7 +73,7 @@ class accionesController extends Controller
                     $files = $request->file('file'.($i + 1));
                     $n=0;
                     foreach($files as $file){
-                        $filename = $file->getClientOriginalName();
+                        $filename = time().$file->getClientOriginalName();
                         $archivos[$n] = $filename;
                         $n = $n + 1;
                         $file->move(public_path().'/'.Auth::user()->name.'/Evidencias', $filename);
@@ -156,6 +156,7 @@ class accionesController extends Controller
         $evid = array();
         $archivos = array();
         $e = array();
+        $elim = array();
 
         /*$form = DB::table('actions')->where('id', $id)->get();
         $array = get_object_vars($form[0]);
@@ -165,7 +166,9 @@ class accionesController extends Controller
         for($j=0; $j<sizeof($keys); $j++){
             $evid[$keys[$j]] = $ev[$keys[$j]];
         }*/
-
+            for($i=0; $i<$request->input('toelim'); $i++){
+                $elim[$i] = $request->input('el'.$i);
+            }
 
            for ($i=0; $i < $tot; $i++) {
                 $num[$i] = $request->input('No'.($i + 1));
@@ -175,32 +178,40 @@ class accionesController extends Controller
                 $Fini[$i] = $request->input('Fini'.($i + 1));
                 $pond[$i] = $request->input('pond'.($i + 1));
                 $estado[$i] = $request->input('estado'.($i + 1));
-                $Ffinal[$i] = $request->input('Ffinal'.($i + 1));
+                $Ffinal[$i] = $request->input('Ffinal'.($i + 1));    
                 $e[$i] = $request->input('x'.$i);
                 $evid[$i] = [];
                 if($request->hasFile('files'.($i + 1))){
                     $files = $request->file('files'.($i + 1));
                     $n=0;
+                    $archivos = [];
                     foreach($files as $file){
-                        $filename = $file->getClientOriginalName();
+                        $filename = time().'_'.$file->getClientOriginalName();
                         $archivos[$n] = $filename;
                         $n = $n + 1;
                     }
                     $evid[$i] = $archivos;
                 }
-                if(sizeof($evid[$i]) != 0){
-                    if($e[$i] != null){
-                        for($j = 0; $j<sizeof($e[$i]); $j++){
+            }
+
+
+
+            for($i = 0; $i<$tot; $i++){
+                if($e[$i] != null){
+                    for($j = 0; $j<sizeof($e[$i]); $j++){
+                        if($elim[$i] != null){
+                            if(!(in_array($e[$i][$j],$elim[$i]))){
+                                array_push($evid[$i], $e[$i][$j]);
+                            }
+                        }else{
                             array_push($evid[$i], $e[$i][$j]);
                         }
                     }
-                }else{
-                    $evid[$i] = $e[$i];
                 }
             }
 
 
-       DB::table('actions')->where('id', $id)->update(['numero' => $num, 'descripcion' => $desc, 'responsable' => $resp, 'recursos' => $rec, 'F_inicio' => $Fini, 'ponderacion' => $pond, 'estado' => $estado, 'F_finalizacion' => $Ffinal, 'evidencias' => $evid]);
+        DB::table('actions')->where('id', $id)->update(['numero' => $num, 'descripcion' => $desc, 'responsable' => $resp, 'recursos' => $rec, 'F_inicio' => $Fini, 'ponderacion' => $pond, 'estado' => $estado, 'F_finalizacion' => $Ffinal, 'evidencias' => $evid]);
 
         $id = $request->input('gen_id');
         $form = DB::table('generalities')->where('gen_id', $id)->select('objetivo','year')->get();

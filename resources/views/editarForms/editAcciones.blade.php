@@ -91,7 +91,7 @@
 						div_No.classList.add('col-ss-0');
 						div_No.classList.add('rborder');
 
-							var minus = document.createElement('button');
+							/*var minus = document.createElement('button');
 							minus.classList.add('btnminus');
 							minus.setAttribute('type', 'button');
 							minus.setAttribute('value', No);
@@ -105,7 +105,7 @@
 
 							minus.appendChild(i);
 
-						div_No.appendChild(minus);
+						div_No.appendChild(minus);*/
 
 							var in_No = document.createElement('input');
 							in_No.setAttribute('type', 'hidden');
@@ -329,7 +329,7 @@
 										div_btadd.appendChild(in_file);
 
 									div_cont.appendChild(div_btadd);
-
+										eliminar[numero-1] = [];
 										if(size != 0){
 											if(evid[numero-1] != undefined){
 												for(var x = 0; x<evid[numero-1].length; x++){
@@ -359,19 +359,19 @@
 
 													div_files.appendChild(a_file);
 
-														/*var btn_elim = document.createElement('button');
+														var btn_elim = document.createElement('button');
 														btn_elim.classList.add('smallbtn');
 														btn_elim.setAttribute('type', 'button');
 														btn_elim.setAttribute('style', 'background-color: #DF0101; margin-left: 10px;');
-														btn_elim.setAttribute('value', (numero-1) + "-" + x);
-														btn_elim.setAttribute("onclick", "elim(" + "'" +btn_elim.value + "'" + ")");
+														btn_elim.setAttribute('id', 'elim' + (No-1) + 'a' + x);
+														btn_elim.setAttribute('value', (No-1) + "a" + x);
+														btn_elim.setAttribute('onclick','ren('+(No-1)+');' + 'arc(' + x + ');');
 														
-
 															var text = document.createTextNode('Eliminar');
 
 														btn_elim.appendChild(text);
 
-													div_files.appendChild(btn_elim);*/
+													div_files.appendChild(btn_elim);
 
 										div_cont.appendChild(div_files);
 												}
@@ -457,8 +457,9 @@
 				r.parentNode.removeChild(r);
 			}
 			No = 1;
-			const index = num.indexOf(menos);
-			num.splice(index, 1);
+			//const index = num.indexOf(menos);
+			eliminar[(num[menos-1]-1)] = evid[(num[menos-1]-1)];
+			num.splice((menos-1), 1);
 			rows();
 		}
 
@@ -470,13 +471,28 @@
 		function reset_bf(reset_in){
 	        var field = document.getElementById(reset_in);
 	        field.value= field.defaultValue;
+	        var r = reset_in.substring(3);
+	        for(var i = 0; i<evid[r-1].length; i++){
+	        	var p = document.getElementById((r-1) + "-" + i);
+	        	p.style.color = 'black';
+
+	        	var el = document.getElementById('elim' + (r-1) + 'a' + i);
+	        	el.style.display = 'block';
+	        }
+	        eliminar[r-1] = [];
 		}
 
-		/*function elim(val){
-			var p = document.getElementById(val);
-			p.setAttribute('style', 'text-decoration: line-through; color: #BDBDBD;');
-			eliminar.push([val.substring(0,1),val.substring(2)]);
-		}*/
+		var reng = 0;
+		function ren(val){
+			reng = val;
+		}
+		function arc(val){
+			eliminar[reng].push(evid[reng][val]);
+			var p = document.getElementById(reng + "-" + val);
+			p.style.color = '#A4A4A4';
+			var b = document.getElementById("elim" + reng + "a" + val);
+			b.style.display = 'none';
+		}
 	</script>
 
 	<script type="text/javascript">
@@ -540,8 +556,23 @@
 							d.appendChild(x);
 						}
 					}
-					
 				}
+				for(var i = 0; i<eliminar.length; i++){
+					if(eliminar[i] != null){
+						for(var j = 0; j<eliminar[i].length; j++){
+							var x = document.createElement('input');
+							x.setAttribute('type', 'hidden');
+							x.setAttribute('name', 'el' + i + '[]');
+							x.setAttribute('value', eliminar[i][j]);
+							d.appendChild(x);
+						}
+					}
+				}
+							var x = document.createElement('input');
+							x.setAttribute('type', 'hidden');
+							x.setAttribute('name', 'toelim');
+							x.setAttribute('value', eliminar.length);
+							d.appendChild(x);
 
 				f.appendChild(tot);
 				f.appendChild(genid);
