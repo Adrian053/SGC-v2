@@ -227,6 +227,17 @@
       margin-bottom: 10px;
     }
 
+    .pf {
+      white-space: nowrap; 
+      width: 65%; 
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .pf:hover {
+      overflow: visible;
+    }
+
     /* Darker background on mouse-over */
     .btn:hover {
       background-color: RoyalBlue;

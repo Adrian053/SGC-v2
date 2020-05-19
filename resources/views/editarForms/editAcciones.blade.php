@@ -338,6 +338,7 @@
 													div_files.classList.add('smlist');
 
 														var p_file = document.createElement('p');
+														p_file.classList.add('pf');
 														p_file.setAttribute('id', (numero-1) + "-" + x);
 															var text = document.createTextNode(evid[numero-1][x]);
 														p_file.appendChild(text);

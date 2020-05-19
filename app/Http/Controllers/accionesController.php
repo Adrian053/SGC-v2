@@ -157,6 +157,7 @@ class accionesController extends Controller
         $archivos = array();
         $e = array();
         $elim = array();
+        $path = public_path(Auth::user()->name.'/Evidencias');
 
         /*$form = DB::table('actions')->where('id', $id)->get();
         $array = get_object_vars($form[0]);
@@ -187,6 +188,7 @@ class accionesController extends Controller
                     $archivos = [];
                     foreach($files as $file){
                         $filename = time().'_'.$file->getClientOriginalName();
+                        $file->move(public_path().'/'.Auth::user()->name.'/Evidencias', $filename);
                         $archivos[$n] = $filename;
                         $n = $n + 1;
                     }
