@@ -31,6 +31,8 @@ Route::group(['middleware' => ['auth', 'isUsuario']], function() {
     Route::get('/Generalidades/{id}', 'generalidadesController@show');
     Route::post('/Identificacion/{$id}', 'identificacionController@show');
     Route::post('/Acciones/{$id}', 'accionesController@show');
+    Route::view('/Eliminar', 'elimFicha', ['id' => 0]);
+    Route::post('/EliminarF', 'generalidadesController@eliminar');
     /*Route::post('/editsearch', 'editarController@buscar');
     Route::get('/editsearch/{id}', 'editarController@editar');*/
 });

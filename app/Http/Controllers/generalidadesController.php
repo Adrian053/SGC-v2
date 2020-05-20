@@ -125,4 +125,20 @@ class generalidadesController extends Controller
     {
         //
     }
+
+    public function eliminar(Request $request){
+        $obj = $request->input('obj');
+        $year = $request->input('year');
+        $form = DB::table('generalities')->where([['objetivo', "{$obj}"],['year', "{$year}"]])->select('gen_id')->get();
+
+        if(count($form) != 0){
+            $array = get_object_vars($form[0]);
+            $id = $array['gen_id'];
+            DB::table('generalities')->where('gen_id', $id)->delete();
+            return view('elimFicha', compact('id', 'obj', 'year'));
+        }else{
+            $id = -1;
+            return view('elimFicha', compact('id', 'obj', 'year'));
+        }
+    }
 }
