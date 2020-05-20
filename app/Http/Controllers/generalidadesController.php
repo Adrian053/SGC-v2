@@ -134,6 +134,19 @@ class generalidadesController extends Controller
         if(count($form) != 0){
             $array = get_object_vars($form[0]);
             $id = $array['gen_id'];
+
+            $acc = DB::table('actions')->where('gen_id2', $id)->select('evidencias')->get();
+            $arr_Ev = get_object_vars($acc[0]);
+            $evid = json_decode($arr_Ev['evidencias']);
+
+            for($i = 0; $i<sizeof($evid); $i++){
+                if($evid[$i] != null){
+                    for($j = 0; $j<sizeof($evid[$i]); $j++){
+                        unlink(public_path().'/'.Auth::user()->name.'/Evidencias/'.$evid[$i][$j]);
+                    }
+                }
+            }
+
             DB::table('generalities')->where('gen_id', $id)->delete();
             return view('elimFicha', compact('id', 'obj', 'year'));
         }else{

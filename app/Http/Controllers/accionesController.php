@@ -212,6 +212,13 @@ class accionesController extends Controller
                 }
             }
 
+            for($i = 0; $i<sizeof($elim); $i++){
+                if($elim[$i] != null){
+                    for($j = 0; $j<sizeof($elim[$i]); $j++){
+                        unlink(public_path().'/'.Auth::user()->name.'/Evidencias/'.$elim[$i][$j]);
+                    }
+                }
+            }
 
         DB::table('actions')->where('id', $id)->update(['numero' => $num, 'descripcion' => $desc, 'responsable' => $resp, 'recursos' => $rec, 'F_inicio' => $Fini, 'ponderacion' => $pond, 'estado' => $estado, 'F_finalizacion' => $Ffinal, 'evidencias' => $evid]);
 
