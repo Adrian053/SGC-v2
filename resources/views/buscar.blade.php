@@ -224,6 +224,8 @@
 			</div>
 		</div>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 		<script type="text/javascript">
 		var usrname = @json(Auth::user()->name);
 		var num = @json($num);
@@ -536,17 +538,51 @@
 				}
 		}
 
+		var gra = [['Task', 'Actividades cerradas']];
 		function rows(){
+			var arr;
+			var t = 0;
 			for(var i = 0; i<num.length; i++){
 					add_form(num[i]);
+					if(est[i] == 'cerrado'){
+						arr = [desc[i],Number(pon[num[i]-1])];
+						gra.push(arr);
+						t = t + Number(pon[num[i]-1]);
+					}
 			}
 			var total = document.getElementById('3');
 				var text = document.createTextNode(pondTotal + "%");
 			total.appendChild(text);
+
+			if(t < 100){
+				arr = ['actividades faltantes', 100-t];
+				gra.push(arr);
+			}
 		}
 
 		rows();
+
+
+
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+
+  var data = google.visualization.arrayToDataTable(gra);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':'Actividades', 'width':550, 'height':400};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}
+
 	</script>
+		<div id="piechart" style="display: flex; justify-content: center;"></div>
 
 	@endif
 
