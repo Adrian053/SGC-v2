@@ -545,7 +545,7 @@
 			for(var i = 0; i<num.length; i++){
 					add_form(num[i]);
 					if(est[i] == 'cerrado'){
-						arr = [desc[i],Number(pon[num[i]-1])];
+						arr = ['actividad '+num[i],Number(pon[num[i]-1])];
 						gra.push(arr);
 						t = t + Number(pon[num[i]-1]);
 					}

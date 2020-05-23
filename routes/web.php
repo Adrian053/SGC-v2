@@ -20,7 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 //Route::resource('/Planificacion','PlanificacionController')->middleware('auth');
-
+Route::view('/prueba', 'prueba');
 Route::group(['middleware' => ['auth', 'isUsuario']], function() {
     Route::resource('/Planificacion','PlanificacionController');
     Route::resource('/Generalidades', 'generalidadesController');
@@ -35,6 +35,8 @@ Route::group(['middleware' => ['auth', 'isUsuario']], function() {
     Route::post('/EliminarF', 'generalidadesController@eliminar');
     Route::view('/Buscar', 'buscar', ['id' => 0]);
     Route::post('/BuscarF', 'buscarController@buscar');
+    Route::view('/Reportes', 'reportes', ['id' => 0]);
+    Route::post('/Reporte', 'html2pdfController@index');
     /*Route::post('/editsearch', 'editarController@buscar');
     Route::get('/editsearch/{id}', 'editarController@editar');*/
 });
