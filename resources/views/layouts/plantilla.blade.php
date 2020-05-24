@@ -47,7 +47,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">Galería</a>
+              <a class="nav-link" href="/Galeria">Galería</a>
             </li>
 
             <li class="nav-item">
@@ -196,226 +196,249 @@
       .col-11 {width: 91.66%;}
       .col-12 {width: 100%;}
     
-    .contenedor {
+      .contenedor {
         margin: 5px;
         border: 3px solid #ccc;
         text-align: center;
       }
 
-    .btn {
-      background-color: DodgerBlue;
-      border: none;
-      color: white;
-      padding: 12px 16px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+/*/////////////////////////////////////////////////////////////////////////////////////////////////*/
+      .thumbnail_content {
+        margin: 5px;
+        border: 3px solid #ccc;
+        float: left;
+        width: 185px;
+      }
 
-    .smallbtn{
-      background-color: DodgerBlue;
-      border: none;
-      color: white;
-      padding: 1px 10px;
-      font-size: 16px;
-      cursor: pointer;
-      height: 25px;
-    }
+      .desc {
+        border: 1px solid #ccc;
+        border-top: 0px;
+        width: 180px;
+        text-align: center;
+        padding: 15px;
+      }
 
-    .smlist {
-      border-bottom: solid 1px gray;
-      height: 30px;
-      margin-bottom: 10px;
-    }
+      .icon_fol{
+        position: relative;
+        font-size:600%;
+        margin-left: 20%;
+        color: #585858;
+      }
 
-    .pf {
-      white-space: nowrap; 
-      width: 65%; 
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+      .gallery {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        /*padding: 5px;*/
+        width: 180px;
+      }
 
-    .pf:hover {
-      overflow: visible;
-    }
+      .gallery:hover {
+        box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+      }
 
-    /* Darker background on mouse-over */
-    .btn:hover {
-      background-color: RoyalBlue;
-    }
+      .dropbtn {
+        background-color: #A4A4A4;
+        color: white;
+        padding: 12px 16px;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        max-width: 250px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
 
-    .btn2 {
-      background-color: DodgerBlue;
-      border: none;
-      color: white;
-      padding: 25px 70px;
-      margin-top: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+      .dropbtn:hover, .dropbtn:focus {
+        background-color: #848484;
+      }
 
-    .btnminus {
-      background-color: red;
-      border: none;
-      color: white;
-      cursor: pointer;
-      width: 100%;
-    }
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
 
-    /* The Modal (background) */
-    .modal {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      padding-top: 100px; /* Location of the box */
-      padding-left: 30%;
-      padding-right: 30%;
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgb(0,0,0); /* Fallback color */
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    }
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        overflow: auto;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
 
-    /* Modal Content */
-    .modal-content {
-      position: relative;
-      text-align: center;
-      background-color: #fefefe;
-      margin: auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-      min-width: 360px;
-    }
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
 
-    /* The Close Button */
-    .close {
-      color: #aaaaaa;
-      position: relative;
-      text-align: right;
-      font-size: 28px;
-      font-weight: bold;
-    }
+      .dropdown a:hover {background-color: #ddd;}
+/*/////////////////////////////////////////////////////////////////////////////////////////////////*/
+      .btn {
+        background-color: DodgerBlue;
+        border: none;
+        color: white;
+        padding: 12px 16px;
+        font-size: 16px;
+        cursor: pointer;
+      }
 
-    .close:hover,
-    .close:focus {
-      color: #000;
-      text-decoration: none;
-      cursor: pointer;
-    }
+      .smallbtn{
+        background-color: DodgerBlue;
+        border: none;
+        color: white;
+        padding: 1px 10px;
+        font-size: 16px;
+        cursor: pointer;
+        height: 25px;
+      }
 
-    .gallery {
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      padding: 5px;
-      width: 150px;
-    }
+      .smlist {
+        border-bottom: solid 1px gray;
+        height: 30px;
+        margin-bottom: 10px;
+      }
 
-    .gallery:hover {
-      box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-    }
+      .pf {
+        white-space: nowrap; 
+        width: 65%; 
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
-    .dropbtn {
-          background-color: #A4A4A4;
-          color: white;
-          padding: 12px 16px;
-          font-size: 16px;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          max-width: 250px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
+      .pf:hover {
+        overflow: visible;
+      }
 
-        .dropbtn:hover, .dropbtn:focus {
-          background-color: #848484;
-        }
+      /* Darker background on mouse-over */
+      .btn:hover {
+        background-color: RoyalBlue;
+      }
 
-        .dropdown {
-          position: relative;
-          display: inline-block;
-        }
+      .btn2 {
+        background-color: DodgerBlue;
+        border: none;
+        color: white;
+        padding: 25px 70px;
+        margin-top: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
 
-        .dropdown-content {
-          display: none;
-          position: absolute;
-          background-color: #f1f1f1;
-          min-width: 160px;
-          overflow: auto;
-          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-          z-index: 1;
-        }
+      .btnminus {
+        background-color: red;
+        border: none;
+        color: white;
+        cursor: pointer;
+        width: 100%;
+      }
 
-        .dropdown-content a {
-          color: black;
-          padding: 12px 16px;
-          text-decoration: none;
-          display: block;
-        }
+      /* The Modal (background) */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        padding-left: 30%;
+        padding-right: 30%;
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      }
 
-        .dropdown a:hover {background-color: #ddd;}
+      /* Modal Content */
+      .modal-content {
+        position: relative;
+        text-align: center;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        min-width: 360px;
+      }
 
-        .show {display: block;}
+      /* The Close Button */
+      .close {
+        color: #aaaaaa;
+        position: relative;
+        text-align: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
 
-        .rborder {
-          border-right: solid 1px gray;
-        }
+      .close:hover,
+      .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
 
-        .multiselect {
-          width: 200px;
-        }
+      .show {display: block;}
 
-        .selectBox {
-          position: relative;
-        }
+      .rborder {
+        border-right: solid 1px gray;
+      }
 
-        .selectBox select {
-          width: 100%;
-          font-weight: bold;
-        }
+      .multiselect {
+        width: 200px;
+      }
 
-        .overSelect {
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 0;
-          bottom: 0;
-        }
+      .selectBox {
+        position: relative;
+      }
 
-        #checkboxes {
-          display: none;
-          border: 1px #dadada solid;
-        }
+      .selectBox select {
+        width: 100%;
+        font-weight: bold;
+      }
 
-        #checkboxes label {
-          display: block;
-        }
+      .overSelect {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+      }
 
-        #checkboxes label:hover {
-          background-color: #1e90ff;
-        }
+      #checkboxes {
+        display: none;
+        border: 1px #dadada solid;
+      }
 
-        .search {
-          width: 130px;
-          box-sizing: border-box;
-          border: 2px solid #ccc;
-          border-radius: 4px;
-          font-size: 16px;
-          background-color: white;
-          background-image: url('/img/icon_search.png');
-          background-position: 10px 10px; 
-          background-size: 25px 25px;
-          background-repeat: no-repeat;
-          padding: 12px 20px 12px 40px;
-          transition: width 0.4s ease-in-out;
-        }
+      #checkboxes label {
+        display: block;
+      }
 
-        .search:focus {
-          width: 100%;
-        }
+      #checkboxes label:hover {
+        background-color: #1e90ff;
+      }
+
+      .search {
+        width: 130px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: white;
+        background-image: url('/img/icon_search.png');
+        background-position: 10px 10px; 
+        background-size: 25px 25px;
+        background-repeat: no-repeat;
+        padding: 12px 20px 12px 40px;
+        transition: width 0.4s ease-in-out;
+      }
+
+      .search:focus {
+        width: 100%;
+      }
 
     </style>
 

@@ -56,7 +56,7 @@ class html2pdfController extends Controller
     $invoice = pdf::generatePdf($html);
 
             //$document =  Pdf::generatePdf(view('reportes', ['id' => $id, 'obj' => $obj, 'year' => $year,'F_aprovacion' => $F_aprovacion, 'F_apertura' => $F_apertura, 'F_cumplimiento' => $F_cumplimiento]));
-            pdf::stream(view('prueba',compact('id', 'obj', 'year','F_aprovacion', 'F_apertura', 'F_cumplimiento','desc', 'procesos','responsable', 'indicador', 'meta','num','desc_acc','resp_acc','rec','F_inicio','pond','est','F_final')));
+            pdf::stream(view('GeneraReporte',compact('id', 'obj', 'year','F_aprovacion', 'F_apertura', 'F_cumplimiento','desc', 'procesos','responsable', 'indicador', 'meta','num','desc_acc','resp_acc','rec','F_inicio','pond','est','F_final')));
 
             /*return view('prueba',compact('id', 'obj', 'year','F_aprovacion', 'F_apertura', 'F_cumplimiento','desc', 'procesos','responsable', 'indicador', 'meta','num','desc_acc','resp_acc','rec','F_inicio','pond','est','F_final'));*/
         }else{

@@ -20,7 +20,10 @@ Route::get('/', function () {
 Auth::routes();
 
 //Route::resource('/Planificacion','PlanificacionController')->middleware('auth');
-Route::view('/prueba', 'prueba');
+//Route::view('/prueba', 'prueba');
+Route::resource('/Galeria','FolderGalleryController');
+Route:: resource('/Galeria/{folder}/imagenes', 'ImageGalleryController');
+
 Route::group(['middleware' => ['auth', 'isUsuario']], function() {
     Route::resource('/Planificacion','PlanificacionController');
     Route::resource('/Generalidades', 'generalidadesController');
