@@ -54,6 +54,14 @@ class CircularesController extends Controller
         return redirect('/Circulares');
     }
 
+    public function eliminar($name){
+
+        File::delete('Fcirculares/'.$name);
+        DB::table('circulars')->where('cir_name', $name)->delete();
+
+        return redirect('/Circulares');
+    }
+
     /**
      * Display the specified resource.
      *
@@ -62,7 +70,7 @@ class CircularesController extends Controller
      */
     public function show($id)
     {
-        //
+        return "show";
     }
 
     /**
@@ -73,7 +81,7 @@ class CircularesController extends Controller
      */
     public function edit($id)
     {
-        //
+        return "edit";
     }
 
     /**
@@ -96,6 +104,6 @@ class CircularesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return "destroy";
     }
 }

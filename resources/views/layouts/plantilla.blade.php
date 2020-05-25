@@ -311,6 +311,9 @@
 
       .pf:hover {
         overflow: visible;
+        position:absolute; 
+        z-index:1;
+        background-color: white;
       }
 
       /* Darker background on mouse-over */

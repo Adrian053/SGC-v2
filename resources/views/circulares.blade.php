@@ -20,8 +20,8 @@
 
 		@endif
 	@endauth
-
-	<div id="cont" class="row"></div>
+	<div class="row"></div>
+	<div id="cont" class="row col-12"></div>
 
 	<script type="text/javascript"> //script para mostrar window model
 
@@ -59,7 +59,6 @@
 						ver.classList.add('smallbtn');
 						ver.setAttribute('target', '_blank');
 						ver.setAttribute('href', 'http://localhost:8000/Fcirculares/' + cir_name);
-						ver.setAttribute('style', 'margin-left: 20px;');
 
 							var text = document.createTextNode("ver");
 						
@@ -72,13 +71,26 @@
 						down.setAttribute('target', '_blank');
 						down.setAttribute('href', 'http://localhost:8000/Fcirculares/' + cir_name);
 						down.setAttribute('download', cir_name);
-						down.setAttribute('style', 'margin-left: 20px;');
+						down.setAttribute('style', 'margin-left: 5px;');
 
 							var text = document.createTextNode("Descargar");
 						
 						down.appendChild(text);
 
 					div_but.appendChild(down);
+
+						@auth
+							if(@json(Auth::user()->rol==1)){
+								var elim = document.createElement('a');
+								elim.classList.add('btn');
+								elim.classList.add('fa');
+								elim.classList.add('fa-trash');
+								elim.setAttribute('href', '/Circulares/' + cir_name);
+								elim.setAttribute('style', 'margin-left: 5px; background-color: red;')
+
+					div_but.appendChild(elim);
+							}
+						@endauth
 
 				div_cir.appendChild(div_but);
 
