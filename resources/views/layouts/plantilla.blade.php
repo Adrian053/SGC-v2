@@ -51,7 +51,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">Circulares</a>
+              <a class="nav-link" href="/Circulares">Circulares</a>
             </li>
 
             @guest   <!-- el usuario NO esta autenticado? -->
@@ -438,6 +438,13 @@
 
       .search:focus {
         width: 100%;
+      }
+
+      .circular {
+        border-top: solid 3px #465065;
+        border-bottom: solid 3px #465065;
+        margin-left: 20px;
+        min-width: 300px;
       }
 
     </style>

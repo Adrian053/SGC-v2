@@ -23,6 +23,7 @@ Auth::routes();
 //Route::view('/prueba', 'prueba');
 Route::resource('/Galeria','FolderGalleryController');
 Route:: resource('/Galeria/{folder}/imagenes', 'ImageGalleryController');
+Route::resource('/Circulares', 'CircularesController');
 
 Route::group(['middleware' => ['auth', 'isUsuario']], function() {
     Route::resource('/Planificacion','PlanificacionController');
